@@ -138,12 +138,13 @@ function compileAllFiles(options, compilationInfo) {
         files = [referenceFile];
     }
     files = _.map(files, function (item) { return utils.possiblyQuotedRelativePath(item); });
-    var args = files.slice(0);
+    var args = [];
     exports.grunt.log.verbose.writeln("TypeScript path: " + tsc);
     if (tsconfig && tsconfig.passThrough) {
         args.push('--project', tsconfig.tsconfig);
     }
     else {
+        args = files.slice(0);
         if (options.sourceMap) {
             args.push('--sourcemap');
         }

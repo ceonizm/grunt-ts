@@ -208,13 +208,14 @@ export function compileAllFiles(options: Partial<IGruntTSOptions>, compilationIn
     // Quote the files to compile. Needed for command line parsing by tsc
     files = _.map(files, item => utils.possiblyQuotedRelativePath(item));
 
-    let args: string[] = files.slice(0);
+    let args: string[] = [];
 
     grunt.log.verbose.writeln(`TypeScript path: ${tsc}`);
 
     if (tsconfig && tsconfig.passThrough) {
       args.push('--project', tsconfig.tsconfig);
     } else {
+      args = files.slice(0);
       if (options.sourceMap) {
           args.push('--sourcemap');
       }
